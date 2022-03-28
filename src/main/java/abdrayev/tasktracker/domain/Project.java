@@ -2,13 +2,14 @@ package abdrayev.tasktracker.domain;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.List;
 
+/**autor -Almaz
+ date- 2022-03-27*/
 @Entity
 @Data
 @Table

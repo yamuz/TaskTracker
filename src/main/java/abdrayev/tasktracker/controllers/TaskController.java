@@ -9,11 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+/**autor -Almaz
+ date- 2022-03-29*/
 @Controller
 public class TaskController {
-    private TaskService taskService;
-    private ProjectService projectService;
+    private final TaskService taskService;
+    private final ProjectService projectService;
 
     public TaskController(TaskService taskService, ProjectService projectService) {
         this.taskService = taskService;

@@ -6,22 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.criteria.*;
-import java.nio.channels.FileLock;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-
+/**autor -Almaz
+date- 2022-03-28
+Custom repository implementaion with filtering*/
 public class ProjectRepositoryImpl implements ProjectRepositoryCustom{
     public static final String START_DATE_FROM = "startDateFrom";
     public static final String START_DATE_TO   = "startDateTo";
-    public static final String END_DATE_FROM   = "endDateFrom";
-    public static final String END_DATE_TO     = "endDateTo";
     public static final String NAME            = "name";
 
     @Autowired
@@ -33,20 +31,10 @@ public class ProjectRepositoryImpl implements ProjectRepositoryCustom{
         return queryTotal.getResultList();
     }
 
+    /**Building query using entityManager and getCriteriaBuilder
+    filtering of projects works (by 29.03.2022) with name field,
+    also filtering works in period (between startDate and comletionDate)*/
     private Query buildQuery(Map<String, Object> filterFields, Map<String, Object> sortFields){
-        /*  Query query = null;
-        String queryString = "SELECT from Project where ";
-        query = entityManager.createQuery(queryString);
-        if (filterFields.containsKey(START_DATE_FROM)){
-            queryString = addSubstring(queryString, " AND ");
-            query.setParameter(START_DATE_FROM, (Date) filterFields.get(START_DATE_FROM));
-        }
-        if (filterFields.containsKey(START_DATE_TO)){
-            queryString = addSubstring(queryString, " AND ");
-            query.setParameter(START_DATE_TO, (Date) filterFields.get(START_DATE_TO));
-        }*/
-
-
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Project> query = cb.createQuery(Project.class);
         Root<Project> projectRoot = query.from(Project.class);
@@ -64,17 +52,9 @@ public class ProjectRepositoryImpl implements ProjectRepositoryCustom{
                     Utils.fromStringToDate((String) filterFields.get(START_DATE_TO))));
         }
 
-        //Predicate finalPredicate  = cb.and(predicateForColor, predicateForGrade);
         query.where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
 
         return entityManager.createQuery(query);
     }
 
-
-    private String addSubstring(String queryString,  String subString){
-        if (queryString.contains(" AND "))
-            queryString += subString;
-
-        return queryString;
-    }
 }
