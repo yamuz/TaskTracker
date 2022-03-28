@@ -1,2 +1,4 @@
-insert into schema_tasktracker.task (id, description, name, priority, status, project_id)
-values (4,'load on heroku','heroku', 3, 1, 1);
+insert into project (id, name, startdate, comletiondate , status, priority)
+values (1, 'HabitTracker app', '2022-02-01','2022-02-20', 2, 1),
+       (2, 'TaskTracker app', '2022-03-26','2022-02-28', 1, 1);
+

@@ -11,12 +11,12 @@
     Name: <input type="text" name="name" size="50" th:value="${name}"/>
     Start from: <input type="date" name="startDateFrom" th:value="${startDateFrom}">
     to:<input type="date" name="startDateTo" th:value="${startDateTo}">
-    <button type="submit" class="btn btn-primary"> Submit</button>
+    <button type="submit" class="btn btn-primary"> Filter </button>
     <button type="button" class="btn btn-dark" onclick="clearSearch()"/>
 </form>
 
-<table class="table table-striped table-bordered table-hover">
-    <thead class="thead-dark">
+<table class="table table-striped">
+    <thead>
       <tr>
         <th>ID</th>
         <th>Name</th>

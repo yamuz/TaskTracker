@@ -23,7 +23,7 @@
 <br>
 
 <form th:action="@{'/projects/edit/' + ${project.id} +'/tasks/new/'}">
-    <input type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> new task </input>
+    <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> new task </button>
 </form>
 
 <table class="table table-striped table-bordered">
@@ -48,22 +48,12 @@
               <td>
                 <a th:href="@{'/projects/edit/' + ${project.id} + '/tasks/edit/' + ${task.id} }">Edit</a>
                 <a th:href="@{'/projects/edit/' + ${project.id} + '/tasks/delete/' + ${task.id} }">Delete</a>
-
-                 <!-- <button th:id="'delete'+ ${task.id}" onclick="postDelete(1, 2);">Delete</button>-->
             </td>
           </tr>
         </tbody>
 </table>
 
-<script type="text/javascript">
-    function postDelete(one, two){
-        taskId = $("#taskId").content;
-        projectId = $("#projectId").content;
-        alert(projectId);
-        alert(taskId);
-        //$.post("/projects/edit/" + projectId +"/tasks/delete/" + taskId);
-    };
-</script>
+
 
 </body>
 </html>
