@@ -10,8 +10,11 @@ import java.util.List;
 
 @Service
 public class TaskServiceImpl implements TaskService {
-    @Autowired
     TaskRepository taskRepository;
+
+    public TaskServiceImpl(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
     @Override
     public List<Task> listAll() {
@@ -25,8 +28,10 @@ public class TaskServiceImpl implements TaskService {
 
     @Transactional
     @Override
-    public Task save(Task entity) {
-        return taskRepository.save(entity);
+    public Task save(Task task) {
+        if (task.getProject() == null)
+            throw new IllegalArgumentException("project is missing for task:" + task.getName());
+        return taskRepository.save(task);
     }
 
     @Transactional

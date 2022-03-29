@@ -12,8 +12,12 @@ import java.util.Map;
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
-    @Autowired
+
     ProjectRepository projectRepository;
+
+    public ProjectServiceImpl(ProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
+    }
 
     public List<Project> getFilteredProjects(Map<String, Object> filterFields, Map<String, Object> sortFields){
 

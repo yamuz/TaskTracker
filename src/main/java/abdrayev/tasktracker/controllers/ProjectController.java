@@ -27,9 +27,12 @@ public class ProjectController {
     @GetMapping("/projects/all")
     public String getAllProjects(Model model, @Param(value = "name") String name,
                                  @Param(value = "startDateFrom") String startDateFrom,
-                                 @Param(value = "startDateTo") String startDateTo){
+                                 @Param(value = "startDateTo") String startDateTo,
+                                 @Param(value="comletionDateFrom") String comletionDateFrom,
+                                 @Param(value="comletionDateTo") String comletionDateTo){
 
-        Map<String, Object> filterFields = fieldsToMap(name,  startDateFrom,  startDateTo);
+        Map<String, Object> filterFields = fieldsToMap(name,  startDateFrom,  startDateTo,
+                                           comletionDateFrom, comletionDateTo);
         //TO-DO sorting not done yet
         Map<String, Object> sortFields   = new HashMap<>();
 
@@ -43,6 +46,8 @@ public class ProjectController {
         model.addAttribute("name", name);
         model.addAttribute("startDateFrom", startDateFrom );
         model.addAttribute("startDateTo", startDateTo);
+        model.addAttribute("comletionDateFrom", comletionDateFrom);
+        model.addAttribute("comletionDateTo", comletionDateTo);
         return "/projects/projectList";
     }
 
@@ -54,13 +59,27 @@ public class ProjectController {
         return "/projects/project";
     }
 
+    @GetMapping("/projects/new/")
+    public String newProject(Model model){
+        Project project = new Project();
+        model.addAttribute("project", project);
+        return "/projects/project";
+    }
+
+    @GetMapping("/projects/delete/{id}")
+    public String deleteProject(@PathVariable Long id){
+        projectService.delete(id);
+        return "redirect:/projects/all/";
+    }
+
     @PostMapping("/projects/edit/")
     public String saveProject( Project project){
         Project savedProject = projectService.save(project);
         return "redirect:/projects/edit/" + savedProject.getId().toString();
     }
 
-    private Map<String, Object> fieldsToMap(String name, String startDateFrom, String startDateTo){
+    private Map<String, Object> fieldsToMap(String name, String startDateFrom, String startDateTo,
+                                           String comletionDateFrom , String comletionDateTo){
         Map<String, Object> map = new HashMap<>();
         if ( name!=null && !name.isBlank())
             map.put(ProjectRepositoryImpl.NAME, name);
@@ -68,6 +87,10 @@ public class ProjectController {
             map.put(ProjectRepositoryImpl.START_DATE_FROM, startDateFrom);
         if( startDateTo!=null && !startDateTo.isBlank())
             map.put(ProjectRepositoryImpl.START_DATE_TO, startDateTo);
+        if( comletionDateFrom!=null && !comletionDateFrom.isBlank())
+            map.put(ProjectRepositoryImpl.COMPLETION_DATE_FROM, comletionDateFrom);
+        if( comletionDateTo!=null && !comletionDateTo.isBlank())
+            map.put(ProjectRepositoryImpl.COMPLETION_DATE_TO, comletionDateTo);
         return map;
     }
 }

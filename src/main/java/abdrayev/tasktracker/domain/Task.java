@@ -1,6 +1,9 @@
 package abdrayev.tasktracker.domain;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -9,7 +12,8 @@ import javax.validation.constraints.Min;
  date- 2022-03-27*/
 @Entity
 @Table
-@Data
+@Getter
+@Setter
 public class Task {
 
     @Id
@@ -29,4 +33,15 @@ public class Task {
     @JoinColumn(name = "project_id")
     private Project project;
 
+    public Task() {
+    }
+    @Builder
+    public Task(Long id, String name, String description, int priority, TaskStatus status, Project project) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.priority = priority;
+        this.status = status;
+        this.project = project;
+    }
 }

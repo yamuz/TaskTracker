@@ -5,7 +5,13 @@
     <title>Title</title>
     <link>
 </head>
-
+<style>
+    input, select {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+</style>
 <body>
 <div class="card">
     <div class="card-body">
@@ -16,7 +22,6 @@
 
                 <input type="hidden" th:name="id" th:value="*{id}">
                 <input type="hidden" th:name="projectid" th:value="${task.project.id}">
-                <!--<p><b><label th:text="'Project : ' + ${task.project.name}">Project name</label></b></p>-->
                 <div class="input-group-prepend" th:width="20rem">
                    <p>Name:<input type="text" th:field="*{name}"></p>
                 </div>
