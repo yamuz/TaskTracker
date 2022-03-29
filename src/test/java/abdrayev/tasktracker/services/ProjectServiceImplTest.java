@@ -9,10 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -40,7 +37,7 @@ class ProjectServiceImplTest {
     void getFilteredProjects() {
         Project project1 = Project.builder().id(1L).name("Proj1").build();
         Project project2 = Project.builder().id(2L).name("Proj2").build();
-        List<Project> projectList = new ArrayList<>(List.of(project1, project2));
+        List<Project> projectList = new ArrayList<>(Arrays.asList(project1, project2));
 
         when(projectRepository.findProjectsByCustomFields(anyMap(), anyMap())).thenReturn(projectList);
 
@@ -56,7 +53,7 @@ class ProjectServiceImplTest {
     void listAll() {
         Project project1 = Project.builder().id(1L).name("1").build();
         Project project2 = Project.builder().id(2L).name("2").build();
-        List<Project> projectList = new ArrayList<>(List.of(project1, project2));
+        List<Project> projectList = new ArrayList<>(Arrays.asList(project1, project2));
 
         when(projectRepository.findAll()).thenReturn(projectList);
         List<Project> projectList2 = projectService.listAll();
@@ -80,7 +77,7 @@ class ProjectServiceImplTest {
         Project project = Project.builder().id(1L).name("Project").build();
         Task task = Task.builder().id(1L).build();
 
-        project.setTasks(new ArrayList<>(List.of(task)));
+        project.setTasks(new ArrayList<>(Arrays.asList(task)));
         when(projectRepository.save(any(Project.class))).thenReturn(project);
 
         Project projectSaved= projectService.save(project);
