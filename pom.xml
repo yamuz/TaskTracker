@@ -95,8 +95,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-<!--                            Main-Class: org.springframework.boot.loader.JarLauncher-->
-
+                            <mainClass>org.springframework.boot.loader.JarLauncher</mainClass>
                             <startClass>abdrayev.tasktracker.TaskTrackerApplication</startClass>
                         </manifest>
                     </archive>
