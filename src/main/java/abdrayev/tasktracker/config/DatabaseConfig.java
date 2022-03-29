@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories("abdrayev.tasktracker.repositories")
-@PropertySource("classpath:application.yml")
+@PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 @ComponentScan("abdrayev.tasktracker")
 public class DatabaseConfig {
