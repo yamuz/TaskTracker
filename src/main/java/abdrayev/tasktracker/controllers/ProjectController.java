@@ -81,15 +81,15 @@ public class ProjectController {
     private Map<String, Object> fieldsToMap(String name, String startDateFrom, String startDateTo,
                                            String comletionDateFrom , String comletionDateTo){
         Map<String, Object> map = new HashMap<>();
-        if ( name!=null && !name.isBlank())
+        if ( name!=null && !name.isEmpty())
             map.put(ProjectRepositoryImpl.NAME, name);
-        if( startDateFrom!=null && !startDateFrom.isBlank())
+        if( startDateFrom!=null && !startDateFrom.isEmpty())
             map.put(ProjectRepositoryImpl.START_DATE_FROM, startDateFrom);
-        if( startDateTo!=null && !startDateTo.isBlank())
+        if( startDateTo!=null && !startDateTo.isEmpty())
             map.put(ProjectRepositoryImpl.START_DATE_TO, startDateTo);
-        if( comletionDateFrom!=null && !comletionDateFrom.isBlank())
+        if( comletionDateFrom!=null && !comletionDateFrom.isEmpty())
             map.put(ProjectRepositoryImpl.COMPLETION_DATE_FROM, comletionDateFrom);
-        if( comletionDateTo!=null && !comletionDateTo.isBlank())
+        if( comletionDateTo!=null && !comletionDateTo.isEmpty())
             map.put(ProjectRepositoryImpl.COMPLETION_DATE_TO, comletionDateTo);
         return map;
     }
