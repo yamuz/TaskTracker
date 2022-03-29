@@ -24,7 +24,7 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/projects/all")
+    @GetMapping({"/projects/all","/"})
     public String getAllProjects(Model model, @Param(value = "name") String name,
                                  @Param(value = "startDateFrom") String startDateFrom,
                                  @Param(value = "startDateTo") String startDateTo,
