@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments::html_head('Project details')">
+
+</head>
+<body>
+
+<form th:action="@{/projects/edit/}" method="post" th:object="${project}">
+    <input type="hidden" th:field="*{id}"/>
+    Name: <input type="text" th:field="*{name}" th:width="200em">
+    Start date: <input type="date" th:field="*{startDate}">
+    End date: <input type="date" th:field="*{comletionDate}">
+    Status:
+    <select th:field="*{status}">
+        <option th:value="'NotStarted'" th:text="'Not Started'"></option>
+        <option th:value="'Active'" th:text="'Active'"></option>
+        <option th:value="'Completed'" th:text="'Completed'"></option>
+    </select>
+    Priority:<input type="number" th:min="1" th:max="10" th:field="*{priority}"  >
+
+    <input type="submit" class="btn btn-primary" th:value="Save">
+</form>
+<br>
+
+<form th:action="@{'/projects/edit/' + ${project.id} +'/tasks/new/'}" th:if="${!project.isNew()}">
+    <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> new task </button>
+</form>
+
+<table th:if="${!project.isNew()}" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>description</th>
+                <th>priority</th>
+                <th>status</th>
+                <th>actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="task : ${project.tasks}">
+            <td id="taskId" th:text="${task.id}">id</td>
+            <td th:text="${task.name}">name</td>
+            <td th:text="${task.description}">description</td>
+            <td th:text="${task.priority}">priority</td>
+            <td th:text="${task.status}">status</td>
+            <td id="projectId" style="display:none;" th:text="${project.id}"> projectId</td>
+              <td>
+                <a th:href="@{'/projects/edit/' + ${project.id} + '/tasks/edit/' + ${task.id} }">Edit</a>
+                <a th:href="@{'/projects/edit/' + ${project.id} + '/tasks/delete/' + ${task.id} }">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+</table>
+</body>
+</html>

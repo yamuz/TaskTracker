@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='All projects')"/>
+</head>
+<body>
+
+<div class="container container-fluid" th:width="150px">
+    <form method="get" action="/projects/all">
+        <p><label><b> Filter the projects </b></label></p>
+        <label>Name:        </label> <input type="text" name="name" size="50" th:value="${name}"/>
+        <div>
+            <label>Start date from:     </label><input id="startDateFrom" type="date" name="startDateFrom" th:value="${startDateFrom}">
+            <button onclick="javascript:startDateFrom.value=''">X</button>
+            to:<input id="startDateTo" type="date" name="startDateTo" th:value="${startDateTo}">
+            <button onclick="javascript:startDateTo.value=''">X</button>
+        </div>
+
+        <div>
+            <label>Completion date from: </label><input id="comletionDateFrom" type="date" name="comletionDateFrom" th:value="${comletionDateFrom}">
+            <button onclick="javascript:comletionDateFrom.value=''">X</button>
+            to:<input  id="comletionDateTo" type="date" name="comletionDateTo" th:value="${comletionDateTo}">
+            <button onclick="javascript:comletionDateTo.value=''">X</button>
+        </div>
+
+        <button type="submit" class="btn btn-primary"> Filter </button>
+        <button type="button" class="btn btn-dark" onclick="clearSearch()"> Clear All</button>
+    </form>
+</div>
+
+<div>
+    <form th:action="@{'/projects/new/'}">
+        <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> new project </button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Started</th>
+            <th>Completed</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="project : ${projectList}">
+            <td th:text="${project.id}">Project ID</td>
+            <td th:text="${project.name}">Name</td>
+            <td th:text="${project.startDate}">started</td>
+            <td th:text="${project.comletionDate}">completed</td>
+            <td>
+                <a th:href="@{'/projects/edit/' + ${project.id}}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a th:href="@{'/projects/delete/' + ${project.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/projects/all}]]";
+    }
+</script>
+</body>
+</html>
