@@ -6,5 +6,5 @@ it's priority and status.
 On the main page filtering of projects can be done using name field,
 also filtering works in period of project (columns started and comleted). 
 
-Used technologies: PostgreQSL 14 DBMS, Intellij Idea, Spring boot 2.6.5, maven 3.8.5
-Requirements: PostgreQSL DBMS, any  IDE, Maven 3.8.5 
+Used technologies: PostgreQSL 14 DB, Intellij Idea, Spring boot 2.6.5, maven 3.8.5
+Requirements: PostgreQSL DB, any  IDE, Maven 3.8.5 
