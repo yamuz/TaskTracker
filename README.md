@@ -7,4 +7,4 @@ On the main page filtering of projects can be done using name field,
 also filtering works in period of project (columns started and comleted). 
 
 Used technologies: PostgreQSL DBMS, Intellij Idea, Spring boot 2.6.5, maven 3.8.5
-Requirements: PostgreQSL DMS, any  IDE, Maven 3.8.5 
+Requirements: PostgreQSL DBMS, any  IDE, Maven 3.8.5 
